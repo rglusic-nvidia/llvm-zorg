@@ -1788,6 +1788,7 @@ all += [
                         "-DLLVM_ENABLE_ASSERTIONS=ON",
                     ])},
 
+<<<<<<< HEAD
     {'name' : "openmp-offload-cuda-project",
     'tags'  : ["openmp"],
     'workernames' : ["minipc-1050ti-linux"],
@@ -1922,6 +1923,19 @@ all += [
                     checkout_llvm_sources=True,
                     script_interpreter=None
                 )},
+=======
+    # ARMv7 LibC++ and LibC++abi tests (require Clang+RT)
+    {'name' : 'libcxx-libcxxabi-libunwind-armv7-linux',
+    'tags'  : ["libcxx"],
+    'workernames': ['linaro-tk1-02'],
+    'builddir': 'libcxx-libcxxabi-libunwind-armv7-linux',
+    'factory' : LibcxxAndAbiBuilder.getLibcxxAndAbiBuilder(
+                    cmake_extra_opts={
+                        'LIBCXXABI_USE_LLVM_UNWINDER': 'ON',
+                        'CMAKE_C_FLAGS': '-mcpu=cortex-a15 -marm',
+                        'CMAKE_CXX_FLAGS': '-mcpu=cortex-a15 -marm',
+                        'LLVM_PARALLEL_LINK_JOBS': '2'})},
+>>>>>>> c744ef8bd3629a023a3958525aaf41b0be906528
 
     # This one has a longer turn-around time, so we cannot disallow collapsing requests
     {'name' : "hip-third-party-libs-test",
